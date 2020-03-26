@@ -17,7 +17,9 @@ $(function() {
         $tableRow.find('.cell-edit-delete').css('display', 'inline-flex');
     });
 
-    $('.btn-work-delete').on('click', function() {
-        console.log('delete');
-    });
+    /*$('.btn-work-delete').on('click', function() {
+        if (confirm('Are you sure you want to DELETE this work?')) {
+            //
+        }
+    });*/
 });

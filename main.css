@@ -37,6 +37,10 @@
     padding: 10px;
 }
 
+.btn-work-delete a {
+    color: #fff;
+}
+
 .cell-value {
     display: block;
 }

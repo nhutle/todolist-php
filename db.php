@@ -1,5 +1,7 @@
 <?php
-	session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
     $database = mysqli_connect('localhost', 'root', '', 'todo-list');
 
@@ -9,10 +11,7 @@
 	$endingDate   = "";
 	$status       = "";
 
-    unset($_SESSION['error']);
-    unset($_SESSION['message']);
-
-	if (isset($_POST['add-new-work'])) {
+	if (isset($_POST['addNewWork'])) {
         if (empty($_POST['name'])
             || empty($_POST['startingDate'])
             || empty($_POST['endingDate'])
@@ -30,5 +29,16 @@
             mysqli_query($database, $insert_sql);
             $_SESSION['message'] = "New work has been successfully added";
             header('location: index.php');
+            exit();
         }
+    }
+
+    if (isset($_GET['deleteWork'])) {
+        $id = $_GET['deleteWork'];
+
+        $delete_sql = "DELETE FROM works WHERE id=".$id;
+        mysqli_query($database, $delete_sql);
+        $_SESSION['message'] = "The work has been successfully removed";
+        header('location: index.php');
+        exit();
     }

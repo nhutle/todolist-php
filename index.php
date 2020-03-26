@@ -33,12 +33,15 @@
                         <option value="Complete">Complete</option>
                     </select>
 
-                    <button type="submit" name="add-new-work" value="add-new-work" class="btn btn-primary mb-2">Add New Work</button>
+                    <button type="submit" name="addNewWork" value="add-new-work" class="btn btn-primary mb-2">Add New Work</button>
                 </form>
 
                 <?php if (isset($_SESSION['error'])) { ?>
                     <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                        <?php echo $errors; ?>
+                        <?php
+                            echo $_SESSION['error'];
+                            unset($_SESSION['error']);
+                        ?>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -47,7 +50,10 @@
 
                 <?php if (isset($_SESSION['message'])) { ?>
                     <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                        <?php echo $_SESSION['message']; ?>
+                        <?php
+                            echo $_SESSION['message'];
+                            unset($_SESSION['message']);
+                        ?>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -115,9 +121,9 @@
                                         <button title="edit" type="button" class="btn btn-info btn-work-edit">
                                             <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
-                                        <button title="delete" type="button" class="btn btn-danger btn-work-delete">
+                                        <a href="index.php?deleteWork=<?php echo $work['id']; ?>" title="delete" type="button" class="btn btn-danger btn-work-delete">
                                             <i class="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="btn-group actions cell-save-discard" role="group" aria-label="actions">
                                         <button title="discard" type="button" class="btn btn-warning btn-work-discard">
