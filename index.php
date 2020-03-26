@@ -19,18 +19,18 @@
             <div class="new-work">
                 <form class="form-inline new-work-form" action="index.php" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="name" id="workNameInput" placeholder="Work Name" required>
+                    <input name="name" type="text" class="form-control mb-2 mr-sm-2" id="workNameInput" placeholder="Work Name" required>
 
                     <label class="sr-only" for="startingDateInput">Starting Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="startingDate" id="startingDateInput" placeholder="Starting Date" required>
+                    <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2" id="startingDateInput" placeholder="Starting Date" required>
 
                     <label class="sr-only" for="endingDateInput">Ending Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="endingDate" id="endingDateInput" placeholder="Ending Date" required>
+                    <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2" id="endingDateInput" placeholder="Ending Date" required>
 
                     <select name="status" class="form-control mb-2 mr-sm-2">
-                        <option>Planing</option>
-                        <option>Doing</option>
-                        <option>Complete</option>
+                        <option value="Planning">Planning</option>
+                        <option value="Doing">Doing</option>
+                        <option value="Complete">Complete</option>
                     </select>
 
                     <button type="submit" name="add-new-work" value="add-new-work" class="btn btn-primary mb-2">Add New Work</button>
@@ -88,7 +88,7 @@
                                 <div class="cell-value">Planning</div>
                                 <div class="cell-input status">
                                     <select class="form-control mb-2 mr-sm-2">
-                                    <option selected>Planing</option>
+                                    <option selected>Planning</option>
                                     <option>Doing</option>
                                     <option>Complete</option>
                                     </select>
