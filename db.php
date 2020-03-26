@@ -15,7 +15,7 @@
             || empty($_POST['endingDate'])
             || empty($_POST['status'])
         ) {
-            $errors = "Please fill up all fields";
+            $errors = "Please fill up all required fields";
         } else {
             $name         = $_POST['name'];
             $startingDate = $_POST['startingDate'];

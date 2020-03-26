@@ -19,13 +19,13 @@
             <div class="new-work">
                 <form class="form-inline new-work-form" action="index.php" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="name" id="workNameInput" placeholder="Work Name">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="name" id="workNameInput" placeholder="Work Name" required>
 
                     <label class="sr-only" for="startingDateInput">Starting Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="startingDate" id="startingDateInput" placeholder="Starting Date">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="startingDate" id="startingDateInput" placeholder="Starting Date" required>
 
                     <label class="sr-only" for="endingDateInput">Ending Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" name="endingDate" id="endingDateInput" placeholder="Ending Date">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="endingDate" id="endingDateInput" placeholder="Ending Date" required>
 
                     <select name="status" class="form-control mb-2 mr-sm-2">
                         <option>Planing</option>
