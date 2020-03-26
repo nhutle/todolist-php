@@ -27,7 +27,7 @@
 
             // Execute:
             mysqli_query($database, $sql_insert);
-            $_SESSION['message'] = "New work has been successfully added";
+            $_SESSION['success'] = "New work has been successfully added";
             header('location: index.php');
             exit();
         }
@@ -38,7 +38,7 @@
 
         $sql_delete = "DELETE FROM `works` WHERE `id`='$id'";
         mysqli_query($database, $sql_delete);
-        $_SESSION['message'] = "The work has been successfully removed";
+        $_SESSION['success'] = "The work has been successfully removed";
         header('location: index.php');
         exit();
     }
@@ -60,7 +60,7 @@
             $sql_update   = "UPDATE `works` SET `name`='$name', `starting_date`='$startingDate', `ending_date`='$endingDate', `status`='$status' WHERE `id`='$id'";
 
             mysqli_query($database, $sql_update);
-            $_SESSION['message'] = "The work has been successfully updated";
+            $_SESSION['success'] = "The work has been successfully updated";
             header('location: index.php');
             exit();
         }
