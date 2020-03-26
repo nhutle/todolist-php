@@ -6,6 +6,7 @@
         <title>Todo List</title>
         <meta name="description" content="Todo List in pure PHP with MVC pattern">
         <meta name="author" content="Nhut Le">
+        <link rel="stylesheet" href="font-awesome.min.css">
         <link rel="stylesheet" href="bootstrap.min.css">
         <link rel="stylesheet" href="main.css">
     </head>
@@ -37,9 +38,6 @@
                 <div class="works-table">
                     <div class="table-header">
                         <div class="table-head">
-                            No.
-                        </div>
-                        <div class="table-head">
                             Work Name
                         </div>
                         <div class="table-head">
@@ -56,38 +54,54 @@
                         </div>
                     </div>
                     <div class="table-body">
-                        <div class="table-row">
+                        <form class="table-row">
                             <div class="table-cell">
-                                1
+                                <div class="cell-value">Buying new laptop</div>
+                                <div class="cell-input">
+                                    <input type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="Buying new laptop">
+                                </div>
                             </div>
                             <div class="table-cell">
-                                Buying new laptop
+                                <div class="cell-value">31/03/2020</div>
+                                <div class="cell-input">
+                                    <input type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="31/03/2020">
+                                </div>
                             </div>
                             <div class="table-cell">
-                                31/03/2020
+                                <div class="cell-value">31/03/2020</div>
+                                <div class="cell-input">
+                                    <input type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="31/03/2020">
+                                </div>
                             </div>
                             <div class="table-cell">
-                                31/03/2020
+                                <div class="cell-value">Planning</div>
+                                <div class="cell-input status">
+                                    <select class="form-control mb-2 mr-sm-2">
+                                    <option selected>Planing</option>
+                                    <option>Doing</option>
+                                    <option>Complete</option>
+                                    </select>
+                                </div>
                             </div>
                             <div class="table-cell">
-                                Planning
-                            </div>
-                            <div class="table-cell">
-                                <div class="btn-group actions" role="group" aria-label="actions">
-                                    <button type="button" class="btn btn-info btn-work-edit">
-                                        <svg class="bi bi-pencil" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"></path>
-                                            <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 00.5.5H4v.5a.5.5 0 00.5.5H5v.5a.5.5 0 00.5.5H6v-1.5a.5.5 0 00-.5-.5H5v-.5a.5.5 0 00-.5-.5H3z" clip-rule="evenodd"></path>
-                                        </svg>
+                                <div class="btn-group actions cell-edit-delete" role="group" aria-label="actions">
+                                    <button title="edit" type="button" class="btn btn-info btn-work-edit">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger btn-work-delete">
-                                        <svg class="bi bi-trash-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 00-1 1v1a1 1 0 001 1H3v9a2 2 0 002 2h6a2 2 0 002-2V4h.5a1 1 0 001-1V2a1 1 0 00-1-1H10a1 1 0 00-1-1H7a1 1 0 00-1 1H2.5zm3 4a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7a.5.5 0 01.5-.5zM8 5a.5.5 0 01.5.5v7a.5.5 0 01-1 0v-7A.5.5 0 018 5zm3 .5a.5.5 0 00-1 0v7a.5.5 0 001 0v-7z" clip-rule="evenodd"></path>
-                                        </svg>
+                                    <button title="delete" type="button" class="btn btn-danger btn-work-delete">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                <div class="btn-group actions cell-save-discard" role="group" aria-label="actions">
+                                    <button title="discard" type="button" class="btn btn-warning btn-work-discard">
+                                        <i class="fa fa-repeat" aria-hidden="true"></i>
+                                    </button>
+                                    <button title="save" type="button" class="btn btn-success btn-work-save">
+                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

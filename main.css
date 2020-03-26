@@ -24,7 +24,7 @@
 
 .table-header {
     display: table-header-group;
-    background-color: #86cfda;
+    background-color: #ccc;
 }
 
 .table-body {
@@ -35,4 +35,17 @@
     display: table-cell;
     width: calc(100%/6);
     padding: 10px;
+}
+
+.cell-value {
+    display: block;
+}
+
+.cell-edit-delete {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+}
+
+.cell-input, .cell-save-discard {
+    display: none;
 }
