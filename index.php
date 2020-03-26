@@ -1,4 +1,10 @@
-<?php include('db.php'); ?>
+<?php
+    include('db.php');
+
+    // Fetch all works from db:
+    $select_sql = "SELECT * FROM works";
+    $works      = mysqli_query($database, $select_sql);
+?>
 
 <!doctype html>
 
@@ -82,34 +88,32 @@
                     </div>
                     <div class="table-body">
                     <?php
-                        $select_sql = "SELECT * FROM works";
-                        $works      = mysqli_query($database, $select_sql);
-
                         // Loop all works:
                         while ($work = mysqli_fetch_assoc($works)) { ?>
-                            <form class="table-row">
+                            <form class="table-row" action="index.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo $work['id']; ?>">
                                 <div class="table-cell">
                                     <div class="cell-value"><?php echo $work['name']; ?></div>
                                     <div class="cell-input">
-                                        <input type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>">
+                                        <input name="name" type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="table-cell">
                                     <div class="cell-value"><?php echo $work['starting_date']; ?></div>
                                     <div class="cell-input">
-                                        <input type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="<?php echo $work['starting_date']; ?>">
+                                        <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="<?php echo $work['starting_date']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="table-cell">
                                     <div class="cell-value"><?php echo $work['ending_date']; ?></div>
                                     <div class="cell-input">
-                                        <input type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="<?php echo $work['ending_date']; ?>">
+                                        <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="<?php echo $work['ending_date']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="table-cell">
                                     <div class="cell-value"><?php echo $work['status']; ?></div>
                                     <div class="cell-input status">
-                                        <select class="form-control mb-2 mr-sm-2">
+                                        <select name="status" class="form-control mb-2 mr-sm-2">
                                             <?php foreach (array('Planning', 'Doing', 'Complete') as $status) {
                                                 echo '<option '.($work['status'] === $status ? 'selected' : '').'>'.$status.'</option>';
                                             } ?>
@@ -129,7 +133,7 @@
                                         <button title="discard" type="button" class="btn btn-warning btn-work-discard">
                                             <i class="fa fa-repeat" aria-hidden="true"></i>
                                         </button>
-                                        <button title="save" type="button" class="btn btn-success btn-work-save">
+                                        <button name="saveWork" value="save-work" title="save" type="submit" class="btn btn-success btn-work-save">
                                             <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                         </button>
                                     </div>
