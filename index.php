@@ -1,3 +1,5 @@
+<?php include('db.php'); ?>
+
 <!doctype html>
 
 <html lang="en">
@@ -15,24 +17,33 @@
         <div class="container">
             <h1 class="alert alert-success title">Todo List</h1>
             <div class="new-work">
-                <form class="form-inline new-work-form">
+                <form class="form-inline new-work-form" action="index.php" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="workNameInput" placeholder="Work Name">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="name" id="workNameInput" placeholder="Work Name">
 
                     <label class="sr-only" for="startingDateInput">Starting Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="startingDateInput" placeholder="Starting Date">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="startingDate" id="startingDateInput" placeholder="Starting Date">
 
                     <label class="sr-only" for="endingDateInput">Ending Date</label>
-                    <input type="text" class="form-control mb-2 mr-sm-2" id="endingDateInput" placeholder="Ending Date">
+                    <input type="text" class="form-control mb-2 mr-sm-2" name="endingDate" id="endingDateInput" placeholder="Ending Date">
 
-                    <select class="form-control mb-2 mr-sm-2">
+                    <select name="status" class="form-control mb-2 mr-sm-2">
                         <option>Planing</option>
                         <option>Doing</option>
                         <option>Complete</option>
                     </select>
 
-                    <button type="submit" class="btn btn-primary mb-2">Add New Work</button>
+                    <button type="submit" name="add-new-work" value="add-new-work" class="btn btn-primary mb-2">Add New Work</button>
                 </form>
+
+                <?php if (isset($errors)) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                        <?php echo $errors; ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
             </div>
             <div class="works">
                 <div class="works-table">
