@@ -1,5 +1,5 @@
 <?php
-    include('actions.php');
+    include('handler.php');
 
     // Fetch all works from db:
     $select_sql = "SELECT * FROM works";
@@ -15,9 +15,9 @@
         <title>Todo List</title>
         <meta name="description" content="Todo List in pure PHP with MVC pattern">
         <meta name="author" content="Nhut Le">
-        <link rel="stylesheet" href="public/vendors/font-awesome/font-awesome.min.css">
-        <link rel="stylesheet" href="public/vendors/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="public/css/main.css">
+        <link rel="stylesheet" href="../public/vendors/font-awesome/font-awesome.min.css">
+        <link rel="stylesheet" href="../public/vendors/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="../public/css/main.css">
     </head>
 
     <body>
@@ -146,8 +146,8 @@
             </div>
         </div>
 
-        <script src="public/vendors/jquery/jquery-3.4.1.min.js"></script>
-        <script src="public/vendors/bootstrap/bootstrap.min.js"></script>
-        <script src="public/js/main.js"></script>
+        <script src="../public/vendors/jquery/jquery-3.4.1.min.js"></script>
+        <script src="../public/vendors/bootstrap/bootstrap.min.js"></script>
+        <script src="../public/js/main.js"></script>
     </body>
 </html>

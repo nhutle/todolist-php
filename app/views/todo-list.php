@@ -15,7 +15,11 @@
 
     <body>
         <div class="container">
-            <h1 class="title">Todo List</h1>
+            <h1 class="title">
+                <span>Todo List</span>
+                <a href="index.php?action=openCalendar" target="_blank" type="button" class="btn btn-primary pull-right btn-open-calendar">Open Calendar</a>
+            </h1>
+
             <div class="new-work">
                 <form class="form-inline new-work-form" action="index.php?action=addWork" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>

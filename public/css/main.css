@@ -3,6 +3,10 @@
     text-align: center;
 }
 
+.btn-open-calendar {
+    margin-bottom: 10px;
+}
+
 .new-work {
     margin: 50px 0;
 }
