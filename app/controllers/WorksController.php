@@ -16,6 +16,13 @@ class WorksController extends MainController
     public function index()
     {
         $works = $this->worksModel->getAll();
+
+        if ($works === false) {
+            $_SESSION['error'] = "Fail to fetch all works, an unknown error occurred";
+        } elseif (empty($works)) {
+            $_SESSION['success'] = "Start adding your work by using form above";
+        }
+
         include 'app/views/todo-list.php';
     }
 
@@ -82,6 +89,26 @@ class WorksController extends MainController
 
     public function openCalendar()
     {
+        $events = array();
+        $works  = $this->worksModel->getAll();
+
+        if ($works === false) {
+            $_SESSION['error'] = "Fail to fetch all works, an unknown error occurred";
+        } elseif (empty($works)) {
+            $_SESSION['success'] = "Start adding your work in homepage to have it here";
+        } else {
+            foreach ($works as $work) {
+                $events[] = array(
+                    'title'       => $work['name'],
+                    'start'       => date('Y-m-d', strtotime($work['starting_date'])),
+                    'end'         => date('Y-m-d', strtotime('+1 day', strtotime($work['ending_date']))),
+                    'description' => $work['status'],
+                    'allDay'      => true,
+                    'color'      => ($work['status'] === 'Planning') ? '#3f9a8d' : (($work['status'] === 'Doing') ? '#939393' : '#d599a2')
+                );
+            }
+        }
+
         include 'app/views/calendar.php';
     }
 }

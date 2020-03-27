@@ -23,45 +23,4 @@ $(function() {
             //
         }
     });*/
-
-    // Render calendar:
-    let calendarEl = document.getElementById('calendar');
-
-    let calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-        height: 'parent',
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-        },
-        defaultView: 'dayGridMonth',
-        defaultDate: new Date(),
-        displayEventTime: false,
-        navLinks: true,
-        editable: true,
-        eventLimit: true,
-        events: [
-            {
-                title: 'All Day Event',
-                start: '2020-03-01',
-            },
-            {
-                title: 'Long Event',
-                start: '2020-03-27',
-                end: '2020-03-30'
-            },
-            {
-                title: 'Repeating Event',
-                start: '2020-03-09'
-            },
-            {
-                title: 'Conference',
-                start: '2020-03-11',
-                end: '2020-03-13'
-            }
-        ]
-    });
-
-    calendar.render();
 });
