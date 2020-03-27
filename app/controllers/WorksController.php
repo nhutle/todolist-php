@@ -79,4 +79,9 @@ class WorksController extends MainController
         header('location: index.php');
         exit();
     }
+
+    public function openCalendar()
+    {
+        include 'app/views/calendar.php';
+    }
 }
