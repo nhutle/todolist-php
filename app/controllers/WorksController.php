@@ -19,18 +19,45 @@ class WorksController extends MainController
 
         switch ($action) {
             case 'addWork':
-                $message = $this->addWork();
-                $this->callRedirect($message);
+                if (empty($_POST['name'])
+                    || empty($_POST['startingDate'])
+                    || empty($_POST['endingDate'])
+                    || empty($_POST['status'])
+                ) {
+                    $result['error'] = "Please fill up all required fields";
+                } else {
+                    $result = $this->addWork($_POST);
+                }
+
+                $this->setSessionMsg($result);
+                $this->callRedirect();
                 break;
 
             case 'updateWork':
-                $message = $this->updateWork();
-                $this->callRedirect($message);
+                if (empty($_POST['id'])
+                    || empty($_POST['name'])
+                    || empty($_POST['startingDate'])
+                    || empty($_POST['endingDate'])
+                    || empty($_POST['status'])
+                ) {
+                    $result['error'] = "Please fill up all required fields";
+                } else {
+                    $result = $this->updateWork($_POST);
+                }
+
+                $this->setSessionMsg($result);
+                $this->callRedirect();
                 break;
 
             case 'deleteWork':
-                $message = $this->deleteWork();
-                $this->callRedirect($message);
+                if (empty($_GET['id'])) {
+                    $result['error'] = "Work id not found";
+                } else {
+                    $result = $this->deleteWork($_GET['id']);
+                }
+
+                $this->setSessionMsg($result);
+                $this->callRedirect();
                 break;
 
             case 'openCalendar':
@@ -45,82 +72,62 @@ class WorksController extends MainController
 
     public function index()
     {
-        $works = $this->worksModel->getAll();
+        $result = array();
+        $works  = $this->worksModel->getAll();
 
         if ($works === false) {
-            $_SESSION['error'] = "Fail to fetch all works, an unknown error occurred";
+            $result['error'] = "Fail to fetch all works, an unknown error occurred";
         } elseif (empty($works)) {
-            $_SESSION['success'] = "Start adding your work by using form above";
+            $result['success'] = "Start adding your work by using form above";
         }
 
+        $this->setSessionMsg($result);
         include 'app/views/todo-list.php';
     }
 
-    public function addWork()
+    public function addWork($work)
     {
-        if (empty($_POST['name'])
-            || empty($_POST['startingDate'])
-            || empty($_POST['endingDate'])
-            || empty($_POST['status'])
-        ) {
-            $message['error'] = "Please fill up all required fields";
+        if ($this->worksModel->add($work)) {
+            $result['success'] = "New work has been successfully added";
         } else {
-            if ($this->worksModel->add($_POST)) {
-                $message['success'] = "New work has been successfully added";
-            } else {
-                $message['error'] = "Fail to add new work, an unknown error occurred";
-            }
+            $result['error'] = "Fail to add new work, an unknown error occurred";
         }
 
-        return $message;
+        return $result;
     }
 
-    public function deleteWork()
+    public function deleteWork($id)
     {
-        if (empty($_GET['id'])) {
-            $message['error'] = "Work id not found";
+        if ($this->worksModel->delete($id)) {
+            $result['success'] = "The work has been successfully removed";
         } else {
-            $id = $_GET['id'];
-
-            if ($this->worksModel->delete($id)) {
-                $message['success'] = "The work has been successfully removed";
-            } else {
-                $message['error'] = "Fail to delete, an unknown error occurred";
-            }
+            $result['error'] = "Fail to delete, an unknown error occurred";
         }
 
-        return $message;
+        return $result;
     }
 
-    public function updateWork()
+    public function updateWork($work)
     {
-        if (empty($_POST['id'])
-            || empty($_POST['name'])
-            || empty($_POST['startingDate'])
-            || empty($_POST['endingDate'])
-            || empty($_POST['status'])
-        ) {
-            $message['error'] = "Please fill up all required fields";
+        if ($this->worksModel->update($work)) {
+            $result['success'] = "Successfully updated";
         } else {
-            if ($this->worksModel->update($_POST)) {
-                $message['success'] = "Successfully updated";
-            } else {
-                $message['error'] = "Fail to save, an unknown error occurred";
-            }
+            $result['error'] = "Fail to save, an unknown error occurred";
         }
 
-        return $message;
+        return $result;
     }
 
     public function openCalendar()
     {
-        $events = array();
-        $works  = $this->worksModel->getAll();
+        $result  = array();
+        $events  = array();
+        $works   = $this->worksModel->getAll();
 
         if ($works === false) {
-            $_SESSION['error'] = "Fail to fetch all works, an unknown error occurred";
+            $result['error'] = "Fail to fetch all works, an unknown error occurred";
         } elseif (empty($works)) {
-            $_SESSION['success'] = "Start adding your work in homepage to have it here";
+            $result['success'] = "Start adding your work in homepage to have it here";
         } else {
             foreach ($works as $work) {
                 $events[] = array(
@@ -134,18 +141,32 @@ class WorksController extends MainController
             }
         }
 
+        $this->setSessionMsg($result);
+
         include 'app/views/calendar.php';
     }
 
-    private function callRedirect($message)
+    private function callRedirect()
     {
+        header('location: index.php');
+        exit();
+    }
+
+    private function setSessionMsg($message) {
         if (isset($message['error'])) {
             $_SESSION['error'] = $message['error'];
         } elseif (isset($message['success'])) {
             $_SESSION['success'] = $message['success'];
         }
+    }
 
-        header('location: index.php');
-        exit();
+    public function getWorkByName($name)
+    {
+        return $this->worksModel->getByName($name);
+    }
+
+    public function getWork($id)
+    {
+        return $this->worksModel->get($id);
     }
 }
