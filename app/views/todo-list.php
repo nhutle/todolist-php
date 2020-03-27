@@ -20,6 +20,32 @@
                 <a href="index.php?action=openCalendar" target="_blank" type="button" class="btn btn-primary pull-right btn-open-calendar">Open Calendar</a>
             </h1>
 
+            <div class="notification">
+                <?php if (isset($_SESSION['error'])) { ?>
+                    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                        <?php
+                        echo $_SESSION['error'];
+                        unset($_SESSION['error']);
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
+
+                <?php if (isset($_SESSION['success'])) { ?>
+                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                        <?php
+                        echo $_SESSION['success'];
+                        unset($_SESSION['success']);
+                        ?>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <?php } ?>
+            </div>
+
             <div class="new-work">
                 <form class="form-inline new-work-form" action="index.php?action=addWork" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>
@@ -39,106 +65,84 @@
 
                     <button type="submit" name="addNewWork" value="add-new-work" class="btn btn-primary mb-2">Add Work</button>
                 </form>
-
-                <?php if (isset($_SESSION['error'])) { ?>
-                    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                        <?php
-                            echo $_SESSION['error'];
-                            unset($_SESSION['error']);
-                        ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <?php } ?>
-
-                <?php if (isset($_SESSION['success'])) { ?>
-                    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-                        <?php
-                            echo $_SESSION['success'];
-                            unset($_SESSION['success']);
-                        ?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <?php } ?>
             </div>
 
-            <div class="works">
-                <div class="works-table">
-                    <div class="table-header">
-                        <div class="table-head">
-                            Work Name
+            <?php if ($works) { ?>
+                <div class="works">
+                    <div class="works-table">
+                        <div class="table-header">
+                            <div class="table-head">
+                                Work Name
+                            </div>
+                            <div class="table-head">
+                                Starting Date
+                            </div>
+                            <div class="table-head">
+                                Ending Date
+                            </div>
+                            <div class="table-head">
+                                Status
+                            </div>
+                            <div class="table-head">
+                                Actions
+                            </div>
                         </div>
-                        <div class="table-head">
-                            Starting Date
-                        </div>
-                        <div class="table-head">
-                            Ending Date
-                        </div>
-                        <div class="table-head">
-                            Status
-                        </div>
-                        <div class="table-head">
-                            Actions
+                        <div class="table-body">
+                            <?php foreach ($works as $work) { ?>
+                                <form class="table-row" action="index.php?action=updateWork" method="post">
+                                    <input type="hidden" name="id" value="<?php echo $work['id']; ?>">
+                                    <div class="table-cell">
+                                        <div class="cell-value"><?php echo $work['name']; ?></div>
+                                        <div class="cell-input">
+                                            <input name="name" type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="table-cell">
+                                        <div class="cell-value"><?php echo $work['starting_date']; ?></div>
+                                        <div class="cell-input">
+                                            <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="<?php echo $work['starting_date']; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="table-cell">
+                                        <div class="cell-value"><?php echo $work['ending_date']; ?></div>
+                                        <div class="cell-input">
+                                            <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="<?php echo $work['ending_date']; ?>" required>
+                                        </div>
+                                    </div>
+                                    <div class="table-cell">
+                                        <div class="cell-value"><?php echo $work['status']; ?></div>
+                                        <div class="cell-input status">
+                                            <select name="status" class="form-control mb-2 mr-sm-2">
+                                                <?php foreach (array('Planning', 'Doing', 'Complete') as $status) {
+                                                    echo '<option '.($work['status'] === $status ? 'selected' : '').'>'.$status.'</option>';
+                                                } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="table-cell">
+                                        <div class="btn-group actions cell-edit-delete" role="group" aria-label="actions">
+                                            <button title="edit" type="button" class="btn btn-info btn-work-edit">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </button>
+                                            <a href="index.php?action=deleteWork&id=<?php echo $work['id']; ?>" title="delete" type="button" class="btn btn-danger btn-work-delete">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                        <div class="btn-group actions cell-save-discard" role="group" aria-label="actions">
+                                            <button title="discard" type="button" class="btn btn-warning btn-work-discard">
+                                                <i class="fa fa-repeat" aria-hidden="true"></i>
+                                            </button>
+                                            <button name="saveWork" value="save-work" title="save" type="submit" class="btn btn-success btn-work-save">
+                                                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            <?php } ?>
                         </div>
                     </div>
-                    <div class="table-body">
-                    <?php foreach ($works as $work) { ?>
-                        <form class="table-row" action="index.php?action=updateWork" method="post">
-                            <input type="hidden" name="id" value="<?php echo $work['id']; ?>">
-                            <div class="table-cell">
-                                <div class="cell-value"><?php echo $work['name']; ?></div>
-                                <div class="cell-input">
-                                    <input name="name" type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>" required>
-                                </div>
-                            </div>
-                            <div class="table-cell">
-                                <div class="cell-value"><?php echo $work['starting_date']; ?></div>
-                                <div class="cell-input">
-                                    <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="<?php echo $work['starting_date']; ?>" required>
-                                </div>
-                            </div>
-                            <div class="table-cell">
-                                <div class="cell-value"><?php echo $work['ending_date']; ?></div>
-                                <div class="cell-input">
-                                    <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="<?php echo $work['ending_date']; ?>" required>
-                                </div>
-                            </div>
-                            <div class="table-cell">
-                                <div class="cell-value"><?php echo $work['status']; ?></div>
-                                <div class="cell-input status">
-                                    <select name="status" class="form-control mb-2 mr-sm-2">
-                                        <?php foreach (array('Planning', 'Doing', 'Complete') as $status) {
-                                            echo '<option '.($work['status'] === $status ? 'selected' : '').'>'.$status.'</option>';
-                                        } ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="table-cell">
-                                <div class="btn-group actions cell-edit-delete" role="group" aria-label="actions">
-                                    <button title="edit" type="button" class="btn btn-info btn-work-edit">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </button>
-                                    <a href="index.php?action=deleteWork&id=<?php echo $work['id']; ?>" title="delete" type="button" class="btn btn-danger btn-work-delete">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
-                                </div>
-                                <div class="btn-group actions cell-save-discard" role="group" aria-label="actions">
-                                    <button title="discard" type="button" class="btn btn-warning btn-work-discard">
-                                        <i class="fa fa-repeat" aria-hidden="true"></i>
-                                    </button>
-                                    <button name="saveWork" value="save-work" title="save" type="submit" class="btn btn-success btn-work-save">
-                                        <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    <?php } ?>
-                    </div>
-                </div>
             </div>
+            <?php } ?>
         </div>
 
         <!-- scripts -->
