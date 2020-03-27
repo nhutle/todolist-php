@@ -37,15 +37,27 @@ class WorksModel extends MainModel
         $status       = $work['status'];
         $sql_update   = "UPDATE `works` SET `name`='$name', `starting_date`='$startingDate', `ending_date`='$endingDate', `status`='$status' WHERE `id`='$id'";
 
-        mysqli_query($this->database, $sql_update);
-
-        return true;
+        return mysqli_query($this->database, $sql_update);
     }
 
     public function delete($id)
     {
         $sql_delete = "DELETE FROM `works` WHERE `id`='$id'";
-        mysqli_query($this->database, $sql_delete);
-        return true;
+
+        return mysqli_query($this->database, $sql_delete);
+    }
+
+    public function getByName($name) {
+        $select_sql = "SELECT * FROM works WHERE `name`='$name' LIMIT 1";
+        $query      = mysqli_query($this->database, $select_sql);
+
+        return mysqli_fetch_assoc($query);
+    }
+
+    public function get($id) {
+        $select_sql = "SELECT * FROM works WHERE `id`='$id'";
+        $query      = mysqli_query($this->database, $select_sql);
+
+        return mysqli_fetch_assoc($query);
     }
 }
