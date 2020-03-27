@@ -13,6 +13,36 @@ class WorksController extends MainController
         $this->worksModel = new WorksModel();
     }
 
+    public function handleRequest()
+    {
+        $action = !empty($_REQUEST['action']) ? $_REQUEST['action'] : "index";
+
+        switch ($action) {
+            case 'addWork':
+                $message = $this->addWork();
+                $this->callRedirect($message);
+                break;
+
+            case 'updateWork':
+                $message = $this->updateWork();
+                $this->callRedirect($message);
+                break;
+
+            case 'deleteWork':
+                $message = $this->deleteWork();
+                $this->callRedirect($message);
+                break;
+
+            case 'openCalendar':
+                $this->openCalendar();
+                break;
+
+            default:
+                $this->index();
+                break;
+        }
+    }
+
     public function index()
     {
         $works = $this->worksModel->getAll();
@@ -33,58 +63,53 @@ class WorksController extends MainController
             || empty($_POST['endingDate'])
             || empty($_POST['status'])
         ) {
-            $_SESSION['error'] = "Please fill up all required fields";
+            $message['error'] = "Please fill up all required fields";
         } else {
             if ($this->worksModel->add($_POST)) {
-                $_SESSION['success'] = "New work has been successfully added";
+                $message['success'] = "New work has been successfully added";
             } else {
-                $_SESSION['error'] = "Fail to add new work, an unknown error occurred";
+                $message['error'] = "Fail to add new work, an unknown error occurred";
             }
         }
 
-        header('location: index.php');
-        exit();
+        return $message;
     }
 
     public function deleteWork()
     {
         if (empty($_GET['id'])) {
-            $_SESSION['error'] = "No id";
+            $message['error'] = "Work id not found";
         } else {
             $id = $_GET['id'];
 
             if ($this->worksModel->delete($id)) {
-                $_SESSION['success'] = "The work has been successfully removed";
+                $message['success'] = "The work has been successfully removed";
             } else {
-                $_SESSION['error'] = "Fail to delete, an unknown error occurred";
+                $message['error'] = "Fail to delete, an unknown error occurred";
             }
         }
 
-        header('location: index.php');
-        exit();
+        return $message;
     }
 
     public function updateWork()
     {
-        if (isset($_POST['saveWork'])) {
-            if (empty($_POST['id'])
-                || empty($_POST['name'])
-                || empty($_POST['startingDate'])
-                || empty($_POST['endingDate'])
-                || empty($_POST['status'])
-            ) {
-                $_SESSION['error'] = "Please fill up all required fields";
+        if (empty($_POST['id'])
+            || empty($_POST['name'])
+            || empty($_POST['startingDate'])
+            || empty($_POST['endingDate'])
+            || empty($_POST['status'])
+        ) {
+            $message['error'] = "Please fill up all required fields";
+        } else {
+            if ($this->worksModel->update($_POST)) {
+                $message['success'] = "Successfully updated";
             } else {
-                if ($this->worksModel->update($_POST)) {
-                    $_SESSION['success'] = "Successfully updated";
-                } else {
-                    $_SESSION['error'] = "Fail to save, an unknown error occurred";
-                }
+                $message['error'] = "Fail to save, an unknown error occurred";
             }
         }
 
-        header('location: index.php');
-        exit();
+        return $message;
     }
 
     public function openCalendar()
@@ -110,5 +135,17 @@ class WorksController extends MainController
         }
 
         include 'app/views/calendar.php';
+    }
+
+    private function callRedirect($message)
+    {
+        if (isset($message['error'])) {
+            $_SESSION['error'] = $message['error'];
+        } elseif (isset($message['success'])) {
+            $_SESSION['success'] = $message['success'];
+        }
+
+        header('location: index.php');
+        exit();
     }
 }
