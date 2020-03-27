@@ -3,7 +3,7 @@
 <html lang="en" class="calendar-html">
     <head>
         <meta charset="utf-8">
-        <title>Calendar</title>
+        <title>Todo List with Calendar</title>
         <meta name="description" content="Todo List with pure PHP in MVC pattern">
         <meta name="author" content="Nhut Le">
 

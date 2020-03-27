@@ -124,15 +124,15 @@
                                             <button title="edit" type="button" class="btn btn-info btn-work-edit">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
-                                            <a href="index.php?action=deleteWork&id=<?php echo $work['id']; ?>" title="delete" type="button" class="btn btn-danger btn-work-delete">
+                                            <button data-href="index.php?action=deleteWork&id=<?php echo $work['id']; ?>" title="delete" type="button" class="btn btn-danger btn-work-delete">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
-                                            </a>
+                                            </button>
                                         </div>
                                         <div class="btn-group actions cell-save-discard" role="group" aria-label="actions">
                                             <button title="discard" type="button" class="btn btn-warning btn-work-discard">
                                                 <i class="fa fa-repeat" aria-hidden="true"></i>
                                             </button>
-                                            <button name="saveWork" value="save-work" title="save" type="submit" class="btn btn-success btn-work-save">
+                                            <button name="updateWork" value="update-work" title="save" type="submit" class="btn btn-success btn-work-update">
                                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
                                             </button>
                                         </div>

@@ -18,9 +18,9 @@ $(function() {
         $tableRow.find('.cell-edit-delete').css('display', 'inline-flex');
     });
 
-    /*$('.btn-work-delete').on('click', function() {
+    $('.btn-work-delete').on('click', function() {
         if (confirm('Are you sure you want to DELETE this work?')) {
-            //
+            window.location.href = $(this).data('href');
         }
-    });*/
+    });
 });
