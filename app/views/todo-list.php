@@ -10,6 +10,7 @@
         <!-- styles -->
         <link rel="stylesheet" href="public/vendors/font-awesome/font-awesome.min.css">
         <link rel="stylesheet" href="public/vendors/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="public/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
         <link rel="stylesheet" href="public/css/main.css">
     </head>
 
@@ -49,13 +50,13 @@
             <div class="new-work">
                 <form class="form-inline new-work-form" action="index.php?action=addWork" method="post">
                     <label class="sr-only" for="workNameInput">Work Name</label>
-                    <input name="name" type="text" class="form-control mb-2 mr-sm-2" id="workNameInput" placeholder="Work Name" required>
+                    <input name="name" type="text" class="form-control mb-2 mr-sm-2" id="workNameInput" placeholder="Work Name" autocomplete="off" required>
 
                     <label class="sr-only" for="startingDateInput">Starting Date</label>
-                    <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2" id="startingDateInput" placeholder="Starting Date" required>
+                    <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 datepicker" id="startingDateInput" placeholder="Starting Date" autocomplete="off" required>
 
                     <label class="sr-only" for="endingDateInput">Ending Date</label>
-                    <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2" id="endingDateInput" placeholder="Ending Date" required>
+                    <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 datepicker" id="endingDateInput" placeholder="Ending Date" autocomplete="off" required>
 
                     <select name="status" class="form-control mb-2 mr-sm-2">
                         <option value="Planning">Planning</option>
@@ -94,19 +95,19 @@
                                     <div class="table-cell">
                                         <div class="cell-value"><?php echo $work['name']; ?></div>
                                         <div class="cell-input">
-                                            <input name="name" type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>" required>
+                                            <input name="name" type="text" class="form-control mb-2 mr-sm-2 work-name" placeholder="Work Name" value="<?php echo $work['name']; ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="table-cell">
-                                        <div class="cell-value"><?php echo $work['starting_date']; ?></div>
+                                        <div class="cell-value"><?php echo date('d-m-Y', strtotime($work['starting_date'])); ?></div>
                                         <div class="cell-input">
-                                            <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 starting-date" placeholder="Starting Date" value="<?php echo $work['starting_date']; ?>" required>
+                                            <input name="startingDate" type="text" class="form-control mb-2 mr-sm-2 datepicker starting-date" placeholder="Starting Date" value="<?php echo date('d-m-Y', strtotime($work['starting_date'])); ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="table-cell">
-                                        <div class="cell-value"><?php echo $work['ending_date']; ?></div>
+                                        <div class="cell-value"><?php echo date('d-m-Y', strtotime($work['ending_date'])); ?></div>
                                         <div class="cell-input">
-                                            <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 ending-date" placeholder="Ending Date" value="<?php echo $work['ending_date']; ?>" required>
+                                            <input name="endingDate" type="text" class="form-control mb-2 mr-sm-2 datepicker ending-date" placeholder="Ending Date" value="<?php echo date('d-m-Y', strtotime($work['ending_date'])); ?>" autocomplete="off" required>
                                         </div>
                                     </div>
                                     <div class="table-cell">
@@ -148,6 +149,7 @@
         <!-- scripts -->
         <script src="public/vendors/jquery/jquery-3.4.1.min.js"></script>
         <script src="public/vendors/bootstrap/bootstrap.min.js"></script>
+        <script src="public/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
         <script src="public/js/main.js"></script>
     </body>
 </html>

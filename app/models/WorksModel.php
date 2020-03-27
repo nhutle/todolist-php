@@ -35,8 +35,8 @@ class WorksModel extends MainModel
     public function add($work)
     {
         $name         = $work['name'];
-        $startingDate = $work['startingDate'];
-        $endingDate   = $work['endingDate'];
+        $startingDate = date('Y-m-d', strtotime($work['startingDate']));
+        $endingDate   = date('Y-m-d', strtotime($work['endingDate']));
         $status       = $work['status'];
         $sql_insert   = "INSERT INTO `works` (`name`, `starting_date`, `ending_date`, `status`) VALUES ('$name', '$startingDate', '$endingDate', '$status')";
 
@@ -53,8 +53,8 @@ class WorksModel extends MainModel
     {
         $id           = $work['id'];
         $name         = $work['name'];
-        $startingDate = $work['startingDate'];
-        $endingDate   = $work['endingDate'];
+        $startingDate = date('Y-m-d', strtotime($work['startingDate']));
+        $endingDate   = date('Y-m-d', strtotime($work['endingDate']));
         $status       = $work['status'];
         $sql_update   = "UPDATE `works` SET `name`='$name', `starting_date`='$startingDate', `ending_date`='$endingDate', `status`='$status' WHERE `id`='$id'";
 

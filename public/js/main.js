@@ -1,6 +1,13 @@
 'use strict';
 
 $(function() {
+    // Initialize date picker:
+    $('.datepicker').datepicker({
+        autoclose: true,
+        format: 'dd-mm-yyyy',
+        weekStart: 1
+    });
+
     // Button events:
     $('.btn-work-edit').on('click', function() {
         let $tableRow = $(this).parents('.table-row');
