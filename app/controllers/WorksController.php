@@ -7,12 +7,20 @@ class WorksController extends MainController
 {
     private $worksModel;
 
+    /**
+     * Constructor.
+     * @author Nhut Le
+     */
     public function __construct()
     {
         parent::__construct();
         $this->worksModel = new WorksModel();
     }
 
+    /**
+     * Handle all requests.
+     * @author Nhut Le
+     */
     public function handleRequest()
     {
         $action = !empty($_REQUEST['action']) ? $_REQUEST['action'] : "index";
@@ -70,6 +78,10 @@ class WorksController extends MainController
         }
     }
 
+    /**
+     * Homepage.
+     * @author Nhut Le
+     */
     public function index()
     {
         $result = array();
@@ -85,6 +97,12 @@ class WorksController extends MainController
         include 'app/views/todo-list.php';
     }
 
+    /**
+     * Add new work.
+     * @author Nhut Le
+     * @param $work
+     * @return array of messages
+     */
     public function addWork($work)
     {
         if ($this->worksModel->add($work)) {
@@ -96,6 +114,12 @@ class WorksController extends MainController
         return $result;
     }
 
+    /**
+     * Delete work by id.
+     * @author Nhut Le
+     * @param $id
+     * @return array of messages
+     */
     public function deleteWork($id)
     {
         if ($this->worksModel->delete($id)) {
@@ -107,6 +131,12 @@ class WorksController extends MainController
         return $result;
     }
 
+    /**
+     * Update work by id.
+     * @author Nhut Le
+     * @param $work
+     * @return array of messages
+     */
     public function updateWork($work)
     {
         if ($this->worksModel->update($work)) {
@@ -118,6 +148,10 @@ class WorksController extends MainController
         return $result;
     }
 
+    /**
+     * Open Calendar.
+     * @author Nhut Le
+     */
     public function openCalendar()
     {
         $result  = array();
@@ -146,12 +180,21 @@ class WorksController extends MainController
         include 'app/views/calendar.php';
     }
 
+    /**
+     * Redirect to homepage.
+     * @author Nhut Le
+     */
     private function callRedirect()
     {
         header('location: index.php');
         exit();
     }
 
+    /**
+     * Set session message.
+     * @author Nhut Le
+     * @param $message
+     */
     private function setSessionMsg($message) {
         if (isset($message['error'])) {
             $_SESSION['error'] = $message['error'];
@@ -160,11 +203,23 @@ class WorksController extends MainController
         }
     }
 
+    /**
+     * Get a work by name - for unit test.
+     * @author Nhut Le
+     * @param $name
+     * @return array
+     */
     public function getWorkByName($name)
     {
         return $this->worksModel->getByName($name);
     }
 
+    /**
+     * Get a work by id - for unit test.
+     * @author Nhut Le
+     * @param $id
+     * @return array
+     */
     public function getWork($id)
     {
         return $this->worksModel->get($id);
