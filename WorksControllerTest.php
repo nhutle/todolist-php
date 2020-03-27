@@ -18,8 +18,8 @@ class WorksControllerTest extends TestCase
     {
         $newWork = array(
             'name'         => 'Test_Add_Work',
-            'startingDate' => '2020-04-01',
-            'endingDate'   => '2020-04-03',
+            'startingDate' => '01-04-2020',
+            'endingDate'   => '03-04-2020',
             'status'       => 'Planning'
         );
         $result = $this->workController->addWork($newWork);
