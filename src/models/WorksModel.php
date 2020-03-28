@@ -1,6 +1,6 @@
 <?php
 
-require_once "MainModel.php";
+require_once("MainModel.php");
 
 class WorksModel extends MainModel
 {

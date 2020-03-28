@@ -1,7 +1,7 @@
 <?php
 
-require_once("app/controllers/MainController.php");
-require_once("app/models/WorksModel.php");
+require_once("MainController.php");
+require_once("src/models/WorksModel.php");
 
 class WorksController extends MainController
 {
@@ -94,7 +94,7 @@ class WorksController extends MainController
         }
 
         $this->setSessionMsg($result);
-        include 'app/views/todo-list.php';
+        include 'src/views/todo-list.php';
     }
 
     /**
@@ -125,7 +125,7 @@ class WorksController extends MainController
         if ($this->worksModel->delete($id)) {
             $result['success'] = "The work has been successfully removed";
         } else {
-            $result['error'] = "Fail to delete, an unknown error occurred";
+            $result['error'] = "Fail to delete work, an unknown error occurred";
         }
 
         return $result;
@@ -140,9 +140,9 @@ class WorksController extends MainController
     public function updateWork($work)
     {
         if ($this->worksModel->update($work)) {
-            $result['success'] = "Successfully updated";
+            $result['success'] = "The work has been successfully updated";
         } else {
-            $result['error'] = "Fail to save, an unknown error occurred";
+            $result['error'] = "Fail to save work, an unknown error occurred";
         }
 
         return $result;
@@ -177,7 +177,7 @@ class WorksController extends MainController
 
         $this->setSessionMsg($result);
 
-        include 'app/views/calendar.php';
+        include 'src/views/calendar.php';
     }
 
     /**
