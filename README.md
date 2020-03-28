@@ -12,7 +12,7 @@
 
 4. To run unit tests, execute this from command line:
     
-    ```./vendor/bin/phpunit WorksControllerTest.php```
+    ```./vendor/bin/phpunit tests/WorksControllerTest.php```
 
 ### Issue
 * Starting Date must be less than Ending date.

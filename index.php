@@ -1,5 +1,5 @@
 <?php
-include_once("app/controllers/WorksController.php");
+include_once("src/controllers/WorksController.php");
 
 $action = !empty($_REQUEST['action']) ? $_REQUEST['action'] : "index";
 
