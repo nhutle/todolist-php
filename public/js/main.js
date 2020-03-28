@@ -4,6 +4,7 @@ $(function() {
     // Initialize date picker:
     $('.datepicker').datepicker({
         autoclose: true,
+        todayHighlight: true,
         format: 'dd-mm-yyyy',
         weekStart: 1
     });
