@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once("app/controllers/WorksController.php");
+require_once("src/controllers/WorksController.php");
 
 class WorksControllerTest extends TestCase
 {
