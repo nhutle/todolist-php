@@ -1,6 +1,6 @@
 <?php
 
-namespace TodoList\Tests;
+namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 use TodoList\Controllers\WorksController;

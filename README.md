@@ -2,9 +2,13 @@
 
 ### Folow the instructions step by step to run the project
 
-1. Run the following command from command line to install PHPUnit
+1. Run the following command from command line to install dependencies
 
     ```composer install```
+    
+2. Run the following command from command line to dump autoload
+    
+      ```composer dump-autoload```
 
 2. Import database dumb from ```todo-list.sql```
 

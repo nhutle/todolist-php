@@ -9,7 +9,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "TodoList\\Tests\\": "tests"
+            "Tests\\": "tests"
         }
     }
 }
