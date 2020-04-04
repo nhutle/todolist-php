@@ -1,5 +1,7 @@
 <?php
 
+namespace TodoList\Models;
+
 class MainModel
 {
     protected $database;

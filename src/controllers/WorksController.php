@@ -1,7 +1,8 @@
 <?php
 
-require_once("MainController.php");
-require_once("src/models/WorksModel.php");
+namespace TodoList\Controllers;
+
+use TodoList\Models\WorksModel;
 
 class WorksController extends MainController
 {
@@ -161,7 +162,7 @@ class WorksController extends MainController
         if ($works === false) {
             $result['error'] = "Fail to fetch all works, an unknown error occurred";
         } elseif (empty($works)) {
-            $result['success'] = "Start adding your work in homepage to have it here";
+            $result['success'] = "Start adding your work in homepage to show it here";
         } else {
             foreach ($works as $work) {
                 $events[] = array(
@@ -170,7 +171,7 @@ class WorksController extends MainController
                     'end'         => date('Y-m-d', strtotime('+1 day', strtotime($work['ending_date']))),
                     'description' => $work['status'],
                     'allDay'      => true,
-                    'color'      => ($work['status'] === 'Planning') ? '#3f9a8d' : (($work['status'] === 'Doing') ? '#939393' : '#d599a2')
+                    'color'       => ($work['status'] === 'Planning') ? '#3f9a8d' : (($work['status'] === 'Doing') ? '#939393' : '#d599a2')
                 );
             }
         }

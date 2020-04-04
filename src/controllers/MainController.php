@@ -1,5 +1,7 @@
 <?php
 
+namespace TodoList\Controllers;
+
 class MainController
 {
     /**
