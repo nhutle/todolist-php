@@ -8,7 +8,7 @@
     
 2. Run the following command from command line to dump autoload
     
-      ```composer dump-autoload```
+    ```composer dump-autoload```
 
 2. Import database dumb from ```todo-list.sql```
 
