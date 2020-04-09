@@ -1,7 +1,7 @@
 <?php
-include_once("app/controllers/WorksController.php");
+require_once __DIR__.'/vendor/autoload.php';
 
-$action = !empty($_REQUEST['action']) ? $_REQUEST['action'] : "index";
+use TodoList\Controllers\WorksController;
 
 $workController = new WorksController();
 $workController->handleRequest();

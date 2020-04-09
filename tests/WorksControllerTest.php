@@ -1,12 +1,13 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
+namespace Tests;
 
-require_once("app/controllers/WorksController.php");
+use PHPUnit\Framework\TestCase;
+use TodoList\Controllers\WorksController;
 
 class WorksControllerTest extends TestCase
 {
-    private  $workController;
+    private $workController;
 
     public function __construct()
     {

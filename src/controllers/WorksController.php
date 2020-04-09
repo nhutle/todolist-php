@@ -1,7 +1,8 @@
 <?php
 
-require_once("app/controllers/MainController.php");
-require_once("app/models/WorksModel.php");
+namespace TodoList\Controllers;
+
+use TodoList\Models\WorksModel;
 
 class WorksController extends MainController
 {
@@ -94,7 +95,7 @@ class WorksController extends MainController
         }
 
         $this->setSessionMsg($result);
-        include 'app/views/todo-list.php';
+        include 'src/views/todo-list.php';
     }
 
     /**
@@ -125,7 +126,7 @@ class WorksController extends MainController
         if ($this->worksModel->delete($id)) {
             $result['success'] = "The work has been successfully removed";
         } else {
-            $result['error'] = "Fail to delete, an unknown error occurred";
+            $result['error'] = "Fail to delete work, an unknown error occurred";
         }
 
         return $result;
@@ -140,9 +141,9 @@ class WorksController extends MainController
     public function updateWork($work)
     {
         if ($this->worksModel->update($work)) {
-            $result['success'] = "Successfully updated";
+            $result['success'] = "The work has been successfully updated";
         } else {
-            $result['error'] = "Fail to save, an unknown error occurred";
+            $result['error'] = "Fail to save work, an unknown error occurred";
         }
 
         return $result;
@@ -161,7 +162,7 @@ class WorksController extends MainController
         if ($works === false) {
             $result['error'] = "Fail to fetch all works, an unknown error occurred";
         } elseif (empty($works)) {
-            $result['success'] = "Start adding your work in homepage to have it here";
+            $result['success'] = "Start adding your work in homepage to show it here";
         } else {
             foreach ($works as $work) {
                 $events[] = array(
@@ -170,14 +171,14 @@ class WorksController extends MainController
                     'end'         => date('Y-m-d', strtotime('+1 day', strtotime($work['ending_date']))),
                     'description' => $work['status'],
                     'allDay'      => true,
-                    'color'      => ($work['status'] === 'Planning') ? '#3f9a8d' : (($work['status'] === 'Doing') ? '#939393' : '#d599a2')
+                    'color'       => ($work['status'] === 'Planning') ? '#3f9a8d' : (($work['status'] === 'Doing') ? '#939393' : '#d599a2')
                 );
             }
         }
 
         $this->setSessionMsg($result);
 
-        include 'app/views/calendar.php';
+        include 'src/views/calendar.php';
     }
 
     /**

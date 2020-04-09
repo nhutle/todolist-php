@@ -1,6 +1,6 @@
 <?php
 
-require_once "MainModel.php";
+namespace TodoList\Models;
 
 class WorksModel extends MainModel
 {
